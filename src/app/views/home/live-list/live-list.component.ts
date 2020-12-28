@@ -11,6 +11,8 @@ import { LiveService } from 'src/app/shared/service/live.service';
 export class LiveListComponent implements OnInit {
   livesPrevious: Live[];
   livesNext: Live[];
+  next: boolean = false;
+  previous: boolean = false;
 
   constructor(
     public liveService: LiveService,
@@ -24,12 +26,14 @@ export class LiveListComponent implements OnInit {
   getLives() {
     this.liveService.getLivesWithFlag('previous').subscribe((data) => {
       this.livesPrevious = data.content;
-
       this.livesPrevious.forEach((element) => {
         element.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl(
           element.liveLink
         );
       });
+
+      this.previous = true
+
     });
 
     this.liveService.getLivesWithFlag('next').subscribe((data) => {
@@ -40,6 +44,7 @@ export class LiveListComponent implements OnInit {
           element.liveLink
         );
       });
+      this.next = true;
     });
   }
 }

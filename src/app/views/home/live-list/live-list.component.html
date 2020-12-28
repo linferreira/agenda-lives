@@ -1,6 +1,8 @@
 <mat-tab-group mat-align-tabs="start" class="tab-group">
   <mat-tab label="PRÓXIMAS">
-    <div fxLayout="row" fxLayoutAlign="start center" class="flex-container">
+    <mat-progress-bar mode="indeterminate" *ngIf="!next"></mat-progress-bar>
+
+    <div fxLayout="row" fxLayoutAlign="start center" class="flex-container" *ngIf="next">
       <ng-container class="container" *ngFor="let live of livesPrevious">
         <mat-card
           class="example-card mat-card-live"
@@ -50,8 +52,11 @@
       </ng-container>
     </div>
   </mat-tab>
-  <mat-tab label="REALIZADAS"
-    ><div fxLayout="row" fxLayoutAlign="start center" class="flex-container">
+
+  <mat-tab label="REALIZADAS">
+    <mat-progress-bar mode="indeterminate" *ngIf="!previous"></mat-progress-bar>
+
+    <div fxLayout="row" fxLayoutAlign="start center" class="flex-container" *ngIf="previous">
       <ng-container class="container" *ngFor="let live of livesNext">
         <mat-card
           class="example-card mat-card-live"
